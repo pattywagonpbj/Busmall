@@ -127,3 +127,5 @@ renderedProducts();
 
 // myContainer.addEventListener('click', handleClick);
 // myButton.addEventListener('click', buttonClick);
+
+// I collaborated with Qadree, Paul (TA), Anthony, and Brian when it came to my JS and HTML.
