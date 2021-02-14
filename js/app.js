@@ -107,11 +107,11 @@ function handleClick(event) {
 }
 
 renderedProducts();
+let productName = [];
+let productView = [];
+let productClicks = [];
 
 function renderChart() {
-  let productName = [];
-  let productView = [];
-  let productClicks = [];
   for (let i = 0; i < allProducts.length; i++) {
     productName.push(allProducts[i].name);
     productView.push(allProducts[i].views);
@@ -120,40 +120,40 @@ function renderChart() {
   console.log('productName: ', productName);
   console.log('productViews', productView);
   console.log('productClicks', productClicks);
-}
-var chartObject = {
-  type: 'bar',
-  data: {
-    labels: productName,
-    datasets: [{
-      label: 'Views',
-      data: productView,
-      backgroundColor: 'rgba(75, 192, 192, 0.2)',
-      borderColor: 'rgba(75, 192, 192, 1)',
-      borderWidth: 5
-    },
-    {
-      label: 'Clicks',
-      data: productClicks,
-      backgroundColor: 'rgba(255, 159, 64, 0.2)',
-      borderColor: 'rgba(255, 159, 64, 1)',
-      borderWidth: 5
-    }]
-  },
-  responsive: false,
-  options: {
-    scales: {
-      yAxes: [{
-        ticks: {
-          beginAtZero: true
-        }
+  var chartObject = {
+    type: 'bar',
+    data: {
+      labels: productName,
+      datasets: [{
+        label: 'Views',
+        data: productView,
+        backgroundColor: 'red',
+        borderColor: 'red',
+        borderWidth: 5
+      },
+      {
+        label: 'Clicks',
+        data: productClicks,
+        backgroundColor: 'green',
+        borderColor: 'green',
+        borderWidth: 5
       }]
+    },
+    responsive: false,
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
     }
-  }
-};
+  };
+  let ctx = document.getElementById('myChart').getContext('2d');
+  let myChart = new Chart(ctx, chartObject);
+}
 
 myContainer.addEventListener('click', handleClick);
-let ctx = document.getElementById('myChart').getContext('2d');
-let myChart = new Chart(ctx, chartObject);
 
 // I collaborated with Qadree, Paul (TA), Anthony, and Brian when it came to my JS and HTML.
