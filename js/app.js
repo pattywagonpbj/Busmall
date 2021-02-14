@@ -3,19 +3,20 @@
 // GLobal variables
 
 let totalClicks = 0;
-let clicksAllowed = 15;
+let clicksAllowed = 25;
 let allProducts = [];
+let indexArray = [];
 let imageOne = document.querySelector('section img: first-child');
 let imageTwo = document.querySelector('section img: nth-child(2)');
 let imageThree = document.querySelector('section img: nth-child(3)');
 let myContainer = document.querySelector('section');
-let divButton = document.querySelector('div');
+let myButton = document.querySelector('div');
 
-console.log(imageOne);
-console.log(imageTwo);
-console.log(imageThree);
-console.log(myContainer);
-console.log(divButton);
+// console.log(imageOne);
+// console.log(imageTwo);
+// console.log(imageThree);
+// console.log(myContainer);
+// console.log(myButton);
 
 function Products(name, fileExtensions = 'jpg') {
   this.name = name;
@@ -46,19 +47,30 @@ new Products('usb', 'gif');
 new Products('water-can');
 new Products('win-glass');
 
-function getRandindex() {
+function getRandIndex() {
   return Math.floor(Math.random() * allProducts.length);
 }
 
 function renderedProducts() {
-  let firstProIndex = getRandIndex();
-  let secondProIndex = getRandIndex();
-  let threeProIndex = getRandIndex();
-   while (firstProIndex === secondProIndex || firstProIndex === threeProIndex || secondProIndex === threeProIndex) {
-    secondProIndex = getRandIndex();
-    threeProIndex = getRandIndex();
+  // while (firstProIndex === secondProIndex || firstProIndex === threeProIndex || secondProIndex === threeProIndex) {
+  //   let firstProIndex = getRandIndex();
+  //   let secondProIndex = getRandIndex();
+  //   let threeProIndex = getRandIndex();
+  //   secondProIndex = getRandIndex();
+  //   threeProIndex = getRandIndex();
+  // }
+  while (indexArray.length < 3) {
+    let randomIndex = getRandIndex();
+    while(!indexArray.includes(randomIndex)) {
+      indexArray.push(randomIndex);
+      console.log(randomIndex);
+    }
   }
-  
+
+  let firstProIndex = indexArray.pop();
+  let secondProIndex = indexArray.pop();
+  let threeProIndex = indexArray.pop();
+
 
   imageOne.src = allProducts[firstProIndex].src;
   imageOne.title = allProducts[firstProIndex].name;
@@ -71,48 +83,47 @@ function renderedProducts() {
   imageThree.scr = allProducts[threeProIndex].src;
   imageThree.title = allProducts[threeProIndex].name;
   allProducts[threeProIndex].views++;
+
 }
 
-function renderResults () {
-  // rendering a list of clicks
-  let myList = document.querySelector('ul');
-  for (let i = 0; i < allProducts.length; i++) {
-    let li = document.createElement('li');
-    // blank had 3 votes, and was seen 5 Times.
-      li.textContent = `${allProducts[i].name} was viewed ${allProducts[i].views} times and clicked ${allProducts[i].clicked} times`;
-    myList.appendChild(li);
-  }
-}
+// function renderResults() {
+//   let myList = document.querySelector('ul');
+//   for (let i = 0; i < allProducts.length; i++) {
+//     let li = document.createElement('li');
+//     li.textContent = `${allProducts[i].name} was viewed ${allProducts[i].views} times and clicked ${allProducts[i].clicked} times`;
+//     myList.appendChild(li);
+//   }
+// }
 
-function handleClick(event) {
-  if (event.target === myContainer) {
-    alert('Must click image');
-  }
-  totalClicks++;
-  let getClicked = event.target.title;
+// function handleClick(event) {
+//   if (event.target === myContainer) {
+//     alert('Must click image');
+//   }
+//   totalClicks++;
+//   let getClicked = event.target.title;
 
-  for (let i = 0; i < allProducts.length; i++) {
-    if (getClicked === allProducts[i].name) {
-      allProducts[i].clicks++
-      console.log(allProducts[i]);
-    }
-    console.log(getClicked);
-  }
-  renderedProducts();
-  if (totalClicks === clicksAllowed) {
-    // remove evenet Listener.
-    myContainer.removeEventListener('click', handleClick);
-    renderResults();
-  }
-}
+//   for (let i = 0; i < allProducts.length; i++) {
+//     if (getClicked === allProducts[i].name) {
+//       allProducts[i].clicks++;
+//       console.log(allProducts[i]);
+//     }
+//     console.log(getClicked);
+//   }
+//   renderedProducts();
+//   if (totalClicks === clicksAllowed) {
+//     // remove evenet Listener.
+//     myContainer.removeEventListener('click', handleClick);
+//   }
+// }
 
-function buttonClick(event) {
-  console.log('You clicked this');
-  if (totalClicks === clicksAllowed) {
-    renderResults();
-  }
-}
-renderedGoats();
+// // eslint-disable-next-line no-unused-vars
+// function buttonClick(event) {
+//   console.log('You clicked this');
+//   if (totalClicks === clicksAllowed) {
+//     renderResults();
+//   }
+// }
+renderedProducts();
 
-myContainer.addEventListener('click', handleClick);
-myButton.addEventListener('click')
+// myContainer.addEventListener('click', handleClick);
+// myButton.addEventListener('click', buttonClick);
