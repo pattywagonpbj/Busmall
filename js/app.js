@@ -67,24 +67,24 @@ function renderedProducts() {
     }
   }
 
-  let firstProIndex = indexArray.pop();
-  let secondProIndex = indexArray.pop();
-  let threeProIndex = indexArray.pop();
+//   let firstProIndex = indexArray.pop();
+//   let secondProIndex = indexArray.pop();
+//   let threeProIndex = indexArray.pop();
 
 
-  imageOne.src = allProducts[firstProIndex].src;
-  imageOne.title = allProducts[firstProIndex].name;
-  allProducts[firstProIndex].views++;
+//   imageOne.src = allProducts[firstProIndex].src;
+//   imageOne.title = allProducts[firstProIndex].name;
+//   allProducts[firstProIndex].views++;
 
-  imageTwo.src = allProducts[secondProIndex].src;
-  imageTwo.title = allProducts[secondProIndex].name;
-  allProducts[secondProIndex].views++;
+//   imageTwo.src = allProducts[secondProIndex].src;
+//   imageTwo.title = allProducts[secondProIndex].name;
+//   allProducts[secondProIndex].views++;
 
-  imageThree.scr = allProducts[threeProIndex].src;
-  imageThree.title = allProducts[threeProIndex].name;
-  allProducts[threeProIndex].views++;
+//   imageThree.scr = allProducts[threeProIndex].src;
+//   imageThree.title = allProducts[threeProIndex].name;
+//   allProducts[threeProIndex].views++;
 
-}
+// }
 
 // function renderResults() {
 //   let myList = document.querySelector('ul');
