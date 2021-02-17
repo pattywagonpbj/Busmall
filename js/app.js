@@ -10,13 +10,11 @@ let imageOne = document.querySelector('section img:first-child');
 let imageTwo = document.querySelector('section img:nth-child(2)');
 let imageThree = document.querySelector('section img:nth-child(3)');
 let myContainer = document.querySelector('section');
-let myButton = document.querySelector('div');
 
 console.log(imageOne);
 console.log(imageTwo);
 console.log(imageThree);
 console.log(myContainer);
-console.log(myButton);
 
 function Products(name, fileExtensions = 'jpg') {
   this.name = name;
@@ -59,10 +57,10 @@ function renderedProducts() {
   //   secondProIndex = getRandIndex();
   //   threeProIndex = getRandIndex();
   // }
-  while (indexArray.length < 3) {
+  while (indexArray.length < 6) {
     let randomIndex = getRandIndex();
-    while(!indexArray.includes(randomIndex)) {
-      indexArray.push(randomIndex);
+    while (!indexArray.includes(randomIndex)) {
+      indexArray.unshift(randomIndex);
       console.log(randomIndex);
     }
   }
@@ -86,15 +84,6 @@ function renderedProducts() {
 
 }
 
-function renderResults() {
-  let myList = document.querySelector('ul');
-  for (let i = 0; i < allProducts.length; i++) {
-    let li = document.createElement('li');
-    li.textContent = `${allProducts[i].name} was viewed ${allProducts[i].views} times and clicked ${allProducts[i].clicks} times`;
-    myList.appendChild(li);
-  }
-}
-
 function handleClick(event) {
   if (event.target === myContainer) {
     alert('Must click image');
@@ -113,19 +102,58 @@ function handleClick(event) {
   if (totalClicks === clicksAllowed) {
     // remove evenet Listener.
     myContainer.removeEventListener('click', handleClick);
+    renderChart();
   }
 }
 
-// eslint-disable-next-line no-unused-vars
-function buttonClick(event) {
-  console.log('You clicked this');
-  if (totalClicks === clicksAllowed) {
-    renderResults();
-  }
-}
 renderedProducts();
 
+function renderChart() {
+  let productName = [];
+  let productView = [];
+  let productClicks = [];
+  for (let i = 0; i < allProducts.length; i++) {
+    productName.push(allProducts[i].name);
+    productView.push(allProducts[i].views);
+    productClicks.push(allProducts[i].clicks);
+  }
+  console.log('productName: ', productName);
+  console.log('productViews', productView);
+  console.log('productClicks', productClicks);
+}
+var chartObject = {
+  type: 'bar',
+  data: {
+    labels: productName,
+    datasets: [{
+      label: 'Views',
+      data: productView,
+      backgroundColor: 'rgba(75, 192, 192, 0.2)',
+      borderColor: 'rgba(75, 192, 192, 1)',
+      borderWidth: 5
+    },
+    {
+      label: 'Clicks',
+      data: productClicks,
+      backgroundColor: 'rgba(255, 159, 64, 0.2)',
+      borderColor: 'rgba(255, 159, 64, 1)',
+      borderWidth: 5
+    }]
+  },
+  responsive: false,
+  options: {
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true
+        }
+      }]
+    }
+  }
+};
+
 myContainer.addEventListener('click', handleClick);
-myButton.addEventListener('click', buttonClick);
+let ctx = document.getElementById('myChart').getContext('2d');
+let myChart = new Chart(ctx, chartObject);
 
 // I collaborated with Qadree, Paul (TA), Anthony, and Brian when it came to my JS and HTML.
