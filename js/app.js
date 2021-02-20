@@ -24,39 +24,39 @@ function Products(name, fileExtensions = 'jpg') {
   allProducts.push(this);
 }
 
-new Products('bag');
-new Products('banana');
-new Products('bathroom');
-new Products('boots');
-new Products('breakfast');
-new Products('bubblegum');
-new Products('chair');
-new Products('cthulhu');
-new Products('dog-duck');
-new Products('dragon');
-new Products('pen');
-new Products('pet-sweep');
-new Products('scissors');
-new Products('shark');
-new Products('sweep', 'png');
-new Products('tauntaun');
-new Products('unicorn');
-new Products('usb', 'gif');
-new Products('water-can');
-new Products('wine-glass');
+let retrievedProducts = localStorage.getItem('products');
+
+if (retrievedProducts) {
+  let parsedProducts = JSON.parse(retrievedProducts);
+  allProducts = parsedProducts;
+} else {
+  new Products('bag');
+  new Products('banana');
+  new Products('bathroom');
+  new Products('boots');
+  new Products('breakfast');
+  new Products('bubblegum');
+  new Products('chair');
+  new Products('cthulhu');
+  new Products('dog-duck');
+  new Products('dragon');
+  new Products('pen');
+  new Products('pet-sweep');
+  new Products('scissors');
+  new Products('shark');
+  new Products('sweep', 'png');
+  new Products('tauntaun');
+  new Products('unicorn');
+  new Products('usb', 'gif');
+  new Products('water-can');
+  new Products('wine-glass');
+}
 
 function getRandIndex() {
   return Math.floor(Math.random() * allProducts.length);
 }
 
 function renderedProducts() {
-  // while (firstProIndex === secondProIndex || firstProIndex === threeProIndex || secondProIndex === threeProIndex) {
-  //   let firstProIndex = getRandIndex();
-  //   let secondProIndex = getRandIndex();
-  //   let threeProIndex = getRandIndex();
-  //   secondProIndex = getRandIndex();
-  //   threeProIndex = getRandIndex();
-  // }
   while (indexArray.length < 6) {
     let randomIndex = getRandIndex();
     while (!indexArray.includes(randomIndex)) {
@@ -102,9 +102,12 @@ function handleClick(event) {
   if (totalClicks === clicksAllowed) {
     // remove evenet Listener.
     myContainer.removeEventListener('click', handleClick);
+    let stringifiedProducts = JSON.stringify(allProducts);
+    localStorage.setItem('products', stringifiedProducts);
     renderChart();
   }
 }
+
 
 renderedProducts();
 let productName = [];
