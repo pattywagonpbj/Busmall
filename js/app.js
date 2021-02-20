@@ -159,4 +159,5 @@ function renderChart() {
 
 myContainer.addEventListener('click', handleClick);
 
-// I collaborated with Qadree, Paul (TA), Anthony, and Brian when it came to my JS and HTML.
+// I collaborated with Qadree, Paul (TA), Anthony, and Brian when it came to my JS and HTML. 
+// This also has been added to the README.md portion of this lab.
